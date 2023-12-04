@@ -52,17 +52,24 @@ function TodoListCard() {
     return (
         <React.Fragment>
             <AddItemForm onNewItem={onNewItem} />
-            {items.length === 0 && (
+            {items.length === 0 ? (
                 <p className="text-center">No items yet! Add one above!</p>
+            ) : (
+                <React.Fragment>
+                    <p>Number of items: <strong>{items.length}</strong></p>
+                    <div>
+                        {items.map(item => (
+                            <ItemDisplay
+                                item={item}
+                                key={item.id}
+                                onItemUpdate={onItemUpdate}
+                                onItemRemoval={onItemRemoval}
+                            />
+                        ))}
+                    </div>
+                </React.Fragment>
             )}
-            {items.map(item => (
-                <ItemDisplay
-                    item={item}
-                    key={item.id}
-                    onItemUpdate={onItemUpdate}
-                    onItemRemoval={onItemRemoval}
-                />
-            ))}
+            
         </React.Fragment>
     );
 }
